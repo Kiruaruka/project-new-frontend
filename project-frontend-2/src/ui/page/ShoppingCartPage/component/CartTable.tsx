@@ -6,13 +6,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CartTableRow from './CartTableRow';
-import mockData from '../response.json';
+// import mockData from '../response.json';
+import {CartProductDetailDto} from "../../../../data/dto/CartProductDto.ts";
 
-// type Props = {
-//     quantity: number;
-//     setQuantity: React.Dispatch<React.SetStateAction<number>>
-// }
-export default function BasicTable() {
+
+type Props = {
+    cartItemList:CartProductDetailDto[]
+}
+export default function CartTable({cartItemList}: Props) {
+
     return (
         <TableContainer component={Paper}>
             <Table  aria-label="simple table">
@@ -20,17 +22,17 @@ export default function BasicTable() {
                     <TableRow sx={{backgroundColor: '#F6F6F6'}}>
                         <TableCell colSpan={2}>Product Information</TableCell>
                         {/*<TableCell align="right"></TableCell>*/}
-                        <TableCell align="left">Price</TableCell>
-                        <TableCell align="left">Quantity</TableCell>
-                        <TableCell align="left">Subtotal</TableCell>
+                        <TableCell align="left">Price $HKD </TableCell>
+                        <TableCell align="center">Quantity</TableCell>
+                        <TableCell align="left">Subtotal $HKD </TableCell>
                         <TableCell align="left"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        mockData.map((row) => (
+                        cartItemList.map((row) => (
                             <TableRow sx={{ '&:last-child td, &:last-child th': {border: 0}}} >
-                                <CartTableRow row={row}/>
+                                <CartTableRow row={row} key={row.pid}/>
                             </TableRow>
 
                         ))
